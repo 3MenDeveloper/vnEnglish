@@ -157,7 +157,7 @@ class PHPUnit_Util_XML
     public static function nodeToText(DOMNode $node)
     {
         if ($node->childNodes->length == 1) {
-            return $node->nodeValue;
+            return $node->textContent;
         }
 
         $result = '';
@@ -231,13 +231,13 @@ class PHPUnit_Util_XML
                 break;
 
             case 'boolean':
-                $variable = $element->nodeValue == 'true' ? true : false;
+                $variable = $element->textContent == 'true' ? true : false;
                 break;
 
             case 'integer':
             case 'double':
             case 'string':
-                $variable = $element->nodeValue;
+                $variable = $element->textContent;
 
                 settype($variable, $element->tagName);
                 break;
@@ -386,11 +386,11 @@ class PHPUnit_Util_XML
                     }
                 }
 
-                if ($classes) {
+                if (!empty($classes)) {
                     $tag['class'] = implode(' ', $classes);
                 }
 
-                if ($attrs) {
+                if (!empty($attrs)) {
                     $tag['attributes'] = $attrs;
                 }
             }
@@ -471,6 +471,8 @@ class PHPUnit_Util_XML
         if ($options['class']) {
             $options['attributes']['class'] = $options['class'];
         }
+
+        $nodes = array();
 
         // find the element by a tag type
         if ($options['tag']) {
