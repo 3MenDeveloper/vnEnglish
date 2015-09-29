@@ -15,9 +15,11 @@ class CreateQuizUserQuestionTable extends Migration
         Schema::dropIfExists('quizUserQuestion');
 
         Schema::create('quizUserQuestion', function (Blueprint $table) {
-            $table->integer('quizUserID')->unique();
-            $table->integer('questionID')->unique();
+            $table->integer('quizUserID')->unsigned();
+            $table->integer('questionID')->unsigned();
             $table->primary(['quizUserID', 'questionID']);
+            $table->foreign('quizUserID')->references('quizUserID')->on('quizuser');
+            $table->foreign('questionID')->references('questionID')->on('questions');
             $table->text('userAnswer')->nullable();
             $table->integer('mark')->nullable();
             $table->timestamps();

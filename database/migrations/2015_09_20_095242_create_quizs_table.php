@@ -20,7 +20,7 @@ class CreateQuizsTable extends Migration
             $table->string('title');
             $table->string('images')->nullable();
             $table->string('password', 60);
-            $table->time('duration')->nullable();
+            $table->integer('duration')->nullable();
             $table->boolean('active')->default(1);
             $table->integer('skillID')->unsigned();
             $table->foreign('skillID')->references('skillID')->on('skills');
