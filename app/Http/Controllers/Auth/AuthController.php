@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Http\Requests\LoginRequest;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -22,6 +24,10 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+    protected $loginPath = '/';
+    protected $redirectPath = '/';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new authentication controller instance.
@@ -62,4 +68,25 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function getAdmin()
+    {
+        return view('admin.login');
+    }
+
+    public function postAdmin(LoginRequest $request)
+    {
+        $admin = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'role' => 1
+        ];
+
+        if(Auth::attempt($admin)){
+            return redirect()->route('admin::home');
+        }else{
+            return redirect('admin');
+        }
+    }
+
 }

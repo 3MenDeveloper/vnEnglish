@@ -12,5 +12,62 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::user()['role'] == 2)
+    	return redirect('home');
+    else
+    	return view('welcome');
+});
+
+
+
+// User
+
+// Authentication routes...
+// Route::get('login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@postLogin']);
+Route::get('auth/logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@getLogout']);
+
+// Registration routes...
+// Route::get('register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@postRegister']);
+
+
+Route::get('home', ['as' => 'home', 'uses' => 'Member\MemberController@index']);
+
+Route::group(['prefix' => 'member', 'as' => 'member::', 'namespace' => 'Member'], function(){
+
+	
+
+
+});
+
+
+
+// Admin
+
+Route::get('admin', function(){
+	if(Auth::user()['role'] == 1)
+		return redirect()->route('admin::home');
+	else
+		return redirect()->route('admin.getlogin');
+});
+
+Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'middleware' => 'auth'], function(){
+
+
+
+	Route::get('home', ['as' => 'home', 'uses' => 'AdminController@index']);
+
+});
+
+
+Route::get('admin/login', ['as' => 'admin.getlogin', 'uses' => 'Auth\AuthController@getAdmin']);
+Route::post('admin/login', ['as' => 'admin.postlogin', 'uses' => 'Auth\AuthController@postAdmin']);
+
+
+
+// 404
+
+Route::any('/{name?}', function(){
+	return abort(503);
 });

@@ -21,8 +21,8 @@ class CreateQuizUserTable extends Migration
             $table->boolean('finish')->default(0);
             $table->integer('quizID')->unsigned();
             $table->foreign('quizID')->references('quizID')->on('quizs');
-            $table->integer('userID')->unsigned();
-            $table->foreign('userID')->references('userID')->on('users');
+            $table->integer('id')->unsigned();
+            $table->foreign('id')->references('id')->on('users');
             $table->timestamps();
         });
     }
