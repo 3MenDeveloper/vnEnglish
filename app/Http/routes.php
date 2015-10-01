@@ -54,9 +54,11 @@ Route::get('admin', function(){
 
 Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'middleware' => 'auth'], function(){
 
-
-
 	Route::get('home', ['as' => 'home', 'uses' => 'AdminController@index']);
+
+	Route::resource('skills', 'SkillsController');
+	Route::resource('quizs', 'QuizsController');
+	Route::resource('questions', 'QuestionsController');
 
 });
 
