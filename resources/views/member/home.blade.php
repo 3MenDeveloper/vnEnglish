@@ -5,6 +5,6 @@
 	<title>Home</title>
 </head>
 <body>
-	trang home
+	{{ route('home') }}
 </body>
 </html>

@@ -25,7 +25,7 @@
     <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
       <li class="active treeview">
-        <a href="{{ route('admin::home') }}">
+        <a href="{{ route('admin.home') }}">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
 

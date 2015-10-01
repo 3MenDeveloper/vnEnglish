@@ -83,7 +83,7 @@ class AuthController extends Controller
         ];
 
         if(Auth::attempt($admin)){
-            return redirect()->route('admin::home');
+            return redirect()->route('admin.home');
         }else{
             return redirect('admin');
         }

@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 
 
-// User
+// Members
 
 // Authentication routes...
 // Route::get('login', 'Auth\AuthController@getLogin');
@@ -36,7 +36,7 @@ Route::get('home', ['as' => 'home', 'uses' => 'Member\MemberController@index']);
 
 Route::group(['prefix' => 'member', 'as' => 'member::', 'namespace' => 'Member'], function(){
 
-	
+
 
 
 });
@@ -47,14 +47,16 @@ Route::group(['prefix' => 'member', 'as' => 'member::', 'namespace' => 'Member']
 
 Route::get('admin', function(){
 	if(Auth::user()['role'] == 1)
-		return redirect()->route('admin::home');
+		return redirect()->route('admin.home');
 	else
 		return redirect()->route('admin.getlogin');
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'middleware' => 'auth'], function(){
+Route::get('admin/home', ['as' => 'admin.home', 'uses' => 'Admin\AdminController@index']);
 
-	Route::get('home', ['as' => 'home', 'uses' => 'AdminController@index']);
+Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'middleware' => 'role'], function(){
+
+	
 
 	Route::resource('skills', 'SkillsController');
 	Route::resource('quizs', 'QuizsController');
