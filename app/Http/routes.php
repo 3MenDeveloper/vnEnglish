@@ -47,17 +47,17 @@ Route::group(['prefix' => 'member', 'as' => 'member::', 'namespace' => 'Member']
 
 Route::get('admin', function(){
 	if(Auth::user()['role'] == 1)
-		return redirect()->route('admin.home');
+		return redirect()->route('admin::home');
 	else
 		return redirect()->route('admin.getlogin');
 });
 
-Route::get('admin/home', ['as' => 'admin.home', 'uses' => 'Admin\AdminController@index']);
+
 
 Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'middleware' => 'role'], function(){
 
-	
 
+	Route::get('home', ['as' => 'home', 'uses' => 'AdminController@index']);
 	Route::resource('skills', 'SkillsController');
 	Route::resource('quizs', 'QuizsController');
 	Route::resource('questions', 'QuestionsController');
