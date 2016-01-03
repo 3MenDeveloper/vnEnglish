@@ -20,9 +20,9 @@ class CreateQuizUserTable extends Migration
             $table->integer('mark')->nullable();
             $table->boolean('finish')->default(0);
             $table->integer('quizID')->unsigned();
-            $table->foreign('quizID')->references('quizID')->on('quizs');
+            $table->foreign('quizID')->references('quizID')->on('quizs')->onDelete('cascade');
             $table->integer('id')->unsigned();
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

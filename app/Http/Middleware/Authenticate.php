@@ -39,7 +39,7 @@ class Authenticate
                 return response('Unauthorized.', 401);
             } else {
                 // return redirect()->guest('admin/login')
-                return redirect()->route('admin.getlogin');
+                return redirect('/');
             }
         }
 

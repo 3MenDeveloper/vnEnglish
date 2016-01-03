@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Http\Requests\LoginRequest;
 use Auth;
+use Session;
 
 class AuthController extends Controller
 {
@@ -27,7 +28,8 @@ class AuthController extends Controller
 
     protected $loginPath = '/';
     protected $redirectPath = '/';
-    protected $redirectTo = '/dashboard';
+    // protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -87,6 +89,20 @@ class AuthController extends Controller
         }else{
             return redirect('admin');
         }
+    }
+
+    public function postlogin(LoginRequest $request)
+    {
+        $login = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+
+        if(Auth::attempt($login)){
+            Session::put('success', 'success');
+            return 'success';
+        }
+        return false;
     }
 
 }

@@ -64,6 +64,97 @@
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('assets/js/freelancer.js') }}"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // login
+
+
+            $("#login").submit(function(event) {
+                event.preventDefault();
+
+
+                // Ajax send form
+                var $form = $( this ),
+                term = {
+                    '_token' : $form.find( "input[name='_token']" ).val(),
+                    'email' : $form.find( "input[name='email']" ).val(),
+                    'password' : $form.find( "input[name='password']" ).val(),
+                };
+
+                // Send the data using post
+                var posting = $.post( "/auth/login", term );
+
+                // Put the results in a div
+                posting.done(function( data ) {
+                    window.location = 'home';
+                });
+                posting.fail(function() {
+                    $('.alert').remove();
+                    $(".modal-body").prepend('<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Lỗi! Email hoặc password không đúng</strong></div>');
+                });
+
+            });
+        });
+
+
+            $("#register").submit(function(event) {
+
+                var errMessage = "";
+                $("#register").find(".text-danger").remove();
+                // Check Name
+                if($("#register input[name='name']").val().length === 0) {
+                    errMessage = "<div class='text-danger'>Tên không được bỏ trống!</div>";
+                    $("#register input[name='name']").after(errMessage);
+                } else {
+                    if ($("#register input[name='name']").val().length < 6) {
+                        errMessage = "<div class='text-danger'>Tên nhập vào không phù hợp!</div>";
+                        $("#register input[name='name']").after(errMessage);
+                    }
+                }
+
+                // Check Email
+                if($("#register input[name='email']").val().length === 0) {
+                    errMessage = "<div class='text-danger'>Email không được bỏ trống!</div>";
+                    $("#register input[name='email']").after(errMessage);
+                } else {
+                    var patt = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+                    if (!patt.test($("#register input[name='email']").val())) {
+                        errMessage = "<div class='text-danger'>Email nhập vào không phù hợp!</div>";
+                        $("#register input[name='email']").after(errMessage);
+                    }
+                }
+
+                // Check  Password
+                if($("#register input[name='password']").val().length === 0) {
+                    errMessage = "<div class='text-danger'>Mật khẩu không được bỏ trống!</div>";
+                    $("#register input[name='password']").after(errMessage);
+                } else {
+                    var patt = /^[a-zA-Z]\w{7,31}$/; // password bắt đầu bởi chữ cái, theo sau là kí tự, số hoặc dấu '_'
+                    if (!patt.test($("#register input[name='password']").val())) {
+                        errMessage = "<div class='text-danger'>Mật khẩu nhập vào không phù hợp!<br />Password ít nhất 8 kí tự, bao gồm (chữ, số, _) bắt đầu phải là kí tự chữ!</div>";
+                        $("#register input[name='password']").after(errMessage);
+                    }
+                }
+
+                // Check confirm password
+                if($("#register input[name='password_confirmation']").val().length === 0) {
+                    errMessage = "<div class='text-danger'>Mật khẩu nhập lại không được bỏ trống!</div>";
+                    $("#register input[name='password_confirmation']").after(errMessage);
+                } else {
+                        if ($("#register input[name='password_confirmation']").val() !== $("#register input[name='password']").val()) {
+                            errMessage = "<div class='text-danger'>Mật khẩu nhập vào không khớp!</div>";
+                            $("#register input[name='password_confirmation']").after(errMessage);
+                        }
+                }
+
+                if(errMessage){
+                    event.preventDefault();
+                }
+
+            });
+
+    </script>
+
 </body>
 
 </html>

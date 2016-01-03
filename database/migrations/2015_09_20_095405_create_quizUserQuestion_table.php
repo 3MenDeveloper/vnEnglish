@@ -18,8 +18,8 @@ class CreateQuizUserQuestionTable extends Migration
             $table->integer('quizUserID')->unsigned();
             $table->integer('questionID')->unsigned();
             $table->primary(['quizUserID', 'questionID']);
-            $table->foreign('quizUserID')->references('quizUserID')->on('quizuser');
-            $table->foreign('questionID')->references('questionID')->on('questions');
+            $table->foreign('quizUserID')->references('quizUserID')->on('quizuser')->onDelete('cascade');
+            $table->foreign('questionID')->references('questionID')->on('questions')->onDelete('cascade');
             $table->text('userAnswer')->nullable();
             $table->integer('mark')->nullable();
             $table->timestamps();

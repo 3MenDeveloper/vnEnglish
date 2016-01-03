@@ -18,12 +18,12 @@ class CreateQuizsTable extends Migration
         Schema::create('quizs', function (Blueprint $table) {
             $table->increments('quizID');
             $table->string('title');
-            $table->string('images')->nullable();
+            $table->string('image')->nullable();
             $table->string('password', 60);
             $table->integer('duration')->nullable();
             $table->boolean('active')->default(1);
-            $table->integer('skillID')->unsigned();
-            $table->foreign('skillID')->references('skillID')->on('skills');
+            $table->integer('categoryID')->unsigned();
+            $table->foreign('categoryID')->references('categoryID')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

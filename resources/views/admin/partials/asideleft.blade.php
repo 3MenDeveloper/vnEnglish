@@ -4,10 +4,14 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="/assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        @if(Auth::user()->avatar)
+          <img src="/upload/avatar/{{ Auth::user()->avatar }}" class="img-circle" alt="">
+        @else
+          <img src="/assets/dist/img/avatar5.png" class="img-circle" alt="User Image">
+        @endif
       </div>
       <div class="pull-left info">
-        <p>Vũ Hải Anh</p>
+        <p>{{ Auth::user()->name }}</p>
         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>
@@ -24,22 +28,22 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
-      <li class="active treeview">
+      <!-- <li class="treeview">
         <a href="{{ route('admin::home') }}">
           <i class="fa fa-dashboard"></i> <span>Dashboard</span>
         </a>
 
-      </li>
+      </li> -->
 
       <li class="treeview">
-        <a href="{{ route('admin::admin.skills.index') }}">
+        <a href="{{ route('admin::admin.categories.index') }}">
           <i class="fa fa-files-o"></i>
-          <span>Kĩ Năng (Skills)</span>
-          <span class="label label-primary pull-right">4</span>
+          <span>Chủ Đề (categories)</span>
+          <span class="label label-primary pull-right">{{ count(App\Category::all()) }}</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="{{ route('admin::admin.skills.index') }}"><i class="fa fa-circle-o"></i>Danh Sách</a></li>
-
+          <li><a href="{{ route('admin::admin.categories.index') }}"><i class="fa fa-circle-o"></i>Danh Sách</a></li>
+          <li><a href="{{ route('admin::admin.categories.create') }}" title="Thêm kĩ năng"><i class="fa fa-circle-o"></i>Thêm kĩ năng</a></li>
         </ul>
       </li>
 
@@ -48,10 +52,11 @@
         <a href="{{ route('admin::admin.quizs.index') }}">
           <i class="fa fa-files-o"></i>
           <span>Bài quiz (Quizs)</span>
-          <span class="label label-primary pull-right">4</span>
+          <span class="label label-primary pull-right">{{ count(App\Quiz::all()) }}</span>
         </a>
         <ul class="treeview-menu">
           <li><a href="{{ route('admin::admin.quizs.index') }}"><i class="fa fa-circle-o"></i>Danh Sách</a></li>
+          <li><a href="{{ route('admin::admin.quizs.create') }}"><i class="fa fa-circle-o"></i>Thêm Trắc Nghiệm</a></li>
 
         </ul>
       </li>
@@ -62,41 +67,37 @@
         <a href="{{ route('admin::admin.questions.index') }}">
           <i class="fa fa-files-o"></i>
           <span>Câu hỏi (Questions)</span>
-          <span class="label label-primary pull-right">4</span>
+          <span class="label label-primary pull-right">{{ count(App\Question::all()) }}</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="{{ route('admin::admin.questions.index') }}"><i class="fa fa-circle-o"></i>Danh Sách</a></li>
-
+          <li><a href="{{ route('admin::admin.questions.index') }}"><i class="fa fa-circle-o"></i>Danh Sách Câu Hỏi</a></li>
+          <li><a href="{{ route('admin::admin.questions.create') }}"><i class="fa fa-circle-o"></i>Thêm Câu Hỏi</a></li>
         </ul>
       </li>
-      <!-- <li class="treeview">
-        <a href="#">
-          <i class="fa fa-share"></i> <span>Multilevel</span>
-          <i class="fa fa-angle-left pull-right"></i>
+
+      <li class="treeview">
+        <a href="{{ route('admin::admin.tags.index') }}">
+          <i class="fa fa-files-o"></i>
+          <span>Thẻ (Tags)</span>
+          <span class="label label-primary pull-right">{{ count(App\Tag::all()) }}</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-          <li>
-            <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
-            <ul class="treeview-menu">
-              <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-              <li>
-                <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                  <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                  <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+          <li><a href="{{ route('admin::admin.tags.index') }}"><i class="fa fa-circle-o"></i>Danh Sách Thẻ</a></li>
+          <li><a href="{{ route('admin::admin.tags.create') }}"><i class="fa fa-circle-o"></i>Thêm thẻ</a></li>
         </ul>
-      </li> -->
+      </li>
 
-      <!-- <li class="header">LABELS</li>
-      <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-      <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-      <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li> -->
+      <li class="treeview">
+        <a href="{{ route('admin::admin.users.index') }}">
+          <i class="fa fa-files-o"></i>
+          <span>Thành Viên (users)</span>
+          <span class="label label-primary pull-right">{{ count(App\User::all()) }}</span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{ route('admin::admin.users.index') }}"><i class="fa fa-circle-o"></i>Danh Sách Thành viên</a></li>
+          <li><a href="{{ route('admin::admin.users.create') }}"><i class="fa fa-circle-o"></i>Thêm Thành Viên</a></li>
+        </ul>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->

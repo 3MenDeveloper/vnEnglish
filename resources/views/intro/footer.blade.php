@@ -3,11 +3,11 @@
         <div class="container">
             <div class="row">
                 <div class="footer-col col-md-4">
-                    <h3>Location</h3>
-                    <p>3481 Melrose Place<br>Beverly Hills, CA 90210</p>
+                    <img src="/assets/img/vnenglish.png" alt="">
+                    <p>HỆ THỐNG HỌC TIẾNG ANH ONLINE DÀNH CHO NGƯỜI VIỆT</p>
                 </div>
                 <div class="footer-col col-md-4">
-                    <h3>Around the Web</h3>
+                    <h3>Mạng Xã Hội</h3>
                     <ul class="list-inline">
                         <li>
                             <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
@@ -27,8 +27,8 @@
                     </ul>
                 </div>
                 <div class="footer-col col-md-4">
-                    <h3>About Freelancer</h3>
-                    <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                    <h3>Tác Giả</h3>
+                    <p>Sản phẩm được hợp tác và phát triển bởi nhóm 3WebDeveloper <br> Email: <a href="#">system@vnenglish.com</a>.</p>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    Copyright &copy; Your Website 2014
+                    Copyright &copy; 3WebDeveloper 2015
                 </div>
             </div>
         </div>

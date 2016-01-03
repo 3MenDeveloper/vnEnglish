@@ -21,9 +21,10 @@ class CreateQuestionsTable extends Migration
             $table->text('option')->nullable();
             $table->text('rightAnswer');
             $table->text('rightAnswerNote')->nullable();
+            $table->integer('type')->default(1);
             $table->boolean('active')->default(1);
-            $table->integer('quizID')->unsigned();
-            $table->foreign('quizID')->references('quizID')->on('quizs');
+            $table->integer('categoryID')->unsigned();
+            $table->foreign('categoryID')->references('categoryID')->on('categories')->onDelete('cascade') ;
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
                 <div class="intro-text">
                     <span class="name">VnEnglish</span>
                     <hr class="star-light">
-                    <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
+                    <span class="skills">Chào mừng bạn đến với hệ thống website học Tiếng Anh Online</span>
                 </div>
             </div>
         </div>

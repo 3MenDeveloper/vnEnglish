@@ -19,7 +19,6 @@ Route::get('/', function () {
 });
 
 
-
 // Members
 
 // Authentication routes...
@@ -32,11 +31,71 @@ Route::get('auth/logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController
 Route::post('auth/register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@postRegister']);
 
 
-Route::get('home', ['as' => 'home', 'uses' => 'Member\MemberController@index']);
-
-Route::group(['prefix' => 'member', 'as' => 'member::', 'namespace' => 'Member'], function(){
+Route::get('home', ['as' => 'home', 'uses' => 'Member\MemberController@index', 'middleware' => 'auth']);
 
 
+// Member
+Route::group(['prefix' => 'member', 'as' => 'member::', 'namespace' => 'Member', 'middleware' => 'auth'], function(){
+
+
+	Route::get('quizs/{id}',[
+		'as' => 'quizs',
+		'uses' => 'QuizsController@getQuizs'
+	])->where('id', '[0-9]+');
+
+
+	// Questions
+	Route::post('questions/{cate}/{quiz}/finished',[
+		'as'   => 'questions.finished',
+		'uses' => 'QuestionsController@questionFinished'
+	]);
+
+	Route::get('questions/{cate}/{quiz}', [
+		'as'   => 'questions',
+		'uses' => 'QuestionsController@getQuestion'
+	])->where(['cate' => '[0-9]+', 'quiz' => '[0-9]+']);
+
+	Route::post('questions/{cate}/{quiz}', [
+		'as'   => 'questions.checkAnswer',
+		'uses' => 'QuestionsController@checkAnswer'
+	]);
+
+	/*Route::any('/questions/{name?}', function(){
+		return abort(503);
+	});*/
+
+	Route::get('info', [
+		'as' => 'info',
+		'uses' => 'MemberController@getInfo'
+	]);
+
+	Route::post('info', [
+		'as' => 'updateinfo',
+		'uses' => 'MemberController@updateInfo'
+	]);
+
+	Route::post('info/avatar', [
+		'as' => 'changeavatar',
+		'uses' => 'MemberController@changeAvatar'
+	]);
+
+	Route::get('help', function(){
+		return view('member.content.help');
+	});
+
+	Route::get('action/1', function(){
+		return view('member.content.action');
+	});
+
+	Route::get('chat',[
+		'as'   => 'chat',
+		'uses' => 'MemberController@chat'
+	]);
+
+	Route::post('chat',[
+		'as'   => 'chat',
+		'uses' => 'MemberController@updateChat'
+	]);
 
 
 });
@@ -58,9 +117,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'm
 
 
 	Route::get('home', ['as' => 'home', 'uses' => 'AdminController@index']);
-	Route::resource('skills', 'SkillsController');
+	Route::resource('categories', 'CategoriesController');
 	Route::resource('quizs', 'QuizsController');
 	Route::resource('questions', 'QuestionsController');
+	Route::resource('tags', 'TagsController');
+	Route::resource('users', 'UsersController');
 
 });
 

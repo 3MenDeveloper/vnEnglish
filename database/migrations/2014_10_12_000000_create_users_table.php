@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->date('dateOfBirth')->nullable();
             $table->string('placeOfBirth')->nullable();
             $table->string('avatar')->nullable();
+            $table->integer('userExp')->default(0);
+            $table->integer('userLevel')->default(1);
             $table->boolean('active')->default(1);
             $table->tinyInteger('role')->default(2);
             $table->rememberToken();

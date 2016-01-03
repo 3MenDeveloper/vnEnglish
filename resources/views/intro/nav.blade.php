@@ -19,17 +19,14 @@
                     <a href="#page-top"></a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#portfolio">Portfolio</a>
+                    <a href="#portfolio">Chức Năng</a>
                 </li>
                 <li class="page-scroll">
-                    <a href="#about">About</a>
-                </li>
-                <li class="page-scroll">
-                    <a href="#contact">Contact</a>
+                    <a href="#about">Giới Thiệu</a>
                 </li>
                 @unless (Auth::check())
                 <li>
-                    <a href="" style="color:#3F92D9" data-toggle="modal" data-target="#login">Login</a>
+                    <a href="" style="color:#3F92D9" data-toggle="modal" data-target="#login">Đăng Nhập</a>
                 </li>
                 @endunless
             </ul>
@@ -47,7 +44,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Login</h4>
+                <h4 class="modal-title">Đăng Nhập</h4>
             </div>
             <form id="login" action="/auth/login" method="POST" role="form">
                 <div class="modal-body">
@@ -56,22 +53,22 @@
 
                     <div class="form-group">
                         <label for="">Email</label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
+                        <input type="email" name="email" class="form-control" id="email" placeholder="Email">
                     </div>
 
                     <div class="form-group">
-                        <label for="">Password</label>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                        <label for="">Mật Khẩu</label>
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                     </div>
 
                     <div class="form-group">
-                        <input type="checkbox" name="remember"> Remember Me
-                        <a href="#register" data-toggle="modal" data-dismiss="modal" title="Don't have account">Don't have account</a>
+                        <input type="checkbox" name="remember"> Nhớ tài khoản &nbsp;
+                        <a href="#register" data-toggle="modal" data-dismiss="modal" title="Đăng ký" class="pull-right">Đăng ký</a>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
                 </div>
             </form>
         </div>
@@ -86,7 +83,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Register</h4>
+                <h4 class="modal-title">Đăng ký</h4>
             </div>
             <form id="register" action="/auth/register" method="POST" role="form">
                 <div class="modal-body">
@@ -94,7 +91,7 @@
                     {!! csrf_field() !!}
 
                     <div class="form-group">
-                        <label for="">Name</label>
+                        <label for="">Tên</label>
                         <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Name">
                     </div>
 
@@ -104,19 +101,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Password</label>
+                        <label>Mật khẩu</label>
                         <input type="password" name="password" value="" class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <label>Confirm Password</label>
+                        <label>Nhập lại mật khẩu</label>
                         <input type="password" name="password_confirmation" value="" class="form-control">
                     </div>
 
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary">Đăng Ký</button>
                 </div>
             </form>
         </div>

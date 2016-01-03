@@ -1,7 +1,5 @@
-<!-- Kế thừa giao diện trang home -->
 @extends('admin.home')
 
-<!-- Tiêu đề -->
 @section('title', 'Dashboard')
 
 @section('css')
@@ -14,5 +12,5 @@
 
 @section('content')
 	<!-- Nội dung content -->
-@top
+@stop
 
